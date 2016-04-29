@@ -27,6 +27,6 @@ What's new?
 
 Version 1.0.10.5963
 
-An issue #1 occured on environments with a SwitchMasterToWeb.config. This issue was fixed.
+An issue https://github.com/monkey-dsc/Sitecore.Translator/issues/1 occured on environments with a SwitchMasterToWeb.config. This issue was fixed.
 
 For performance optimization the translation are now gonna be cached! So if you translate something and nothing happens, clear your caches first.
