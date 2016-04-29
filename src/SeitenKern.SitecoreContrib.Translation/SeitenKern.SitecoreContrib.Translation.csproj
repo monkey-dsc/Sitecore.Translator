@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,16 +9,25 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SeitenKern.SitecoreContrib</RootNamespace>
     <AssemblyName>SeitenKern.SitecoreContrib.Translation</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ConfigurationFilter>Release</ConfigurationFilter>
-    <AssemblyInfoFilePath>Properties\AssemblyInfo.cs</AssemblyInfoFilePath>
-    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
-    <AssemblyVersionSettings>IncrementOnDemand.IncrementOnDemandWithReset.Increment.DeltaDayStamp</AssemblyVersionSettings>
-    <AssemblyFileVersionSettings>IncrementOnDemand.IncrementOnDemandWithReset.Increment.DeltaDayStamp</AssemblyFileVersionSettings>
-    <AssemblyInfoVersionSettings>IncrementOnDemand.IncrementOnDemandWithReset.Increment.DeltaDayStamp</AssemblyInfoVersionSettings>
+    <ConfigurationFilter>
+    </ConfigurationFilter>
+    <AssemblyInfoFilePath>
+    </AssemblyInfoFilePath>
+    <UpdateAssemblyVersion>
+    </UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>
+    </UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>
+    </UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>
+    </AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>
+    </AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>
+    </AssemblyInfoVersionSettings>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +45,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AssemblyInfoFilePath>Properties\AssemblyInfo.cs</AssemblyInfoFilePath>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>IncrementOnDemand.IncrementOnDemandWithReset.Increment.DeltaDayStamp</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>IncrementOnDemand.IncrementOnDemandWithReset.Increment.DeltaDayStamp</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>IncrementOnDemand.IncrementOnDemandWithReset.Increment.DeltaDayStamp</AssemblyInfoVersionSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Sitecore.Kernel">
@@ -64,6 +80,7 @@
     <Compile Include="Translation\DefaultTranslator.cs" />
     <Compile Include="Translation\ITranslator.cs" />
     <Compile Include="Translation\Translator.cs" />
+    <Compile Include="Translation\TranslatorCache.cs" />
     <Compile Include="Utils\ItemUtil.cs" />
     <Compile Include="Utils\PathUtil.cs" />
     <Compile Include="Utils\SiteUtil.cs" />
@@ -71,6 +88,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties StartAt="635974848000000000" Versioning="0" IncrementAction="0" IncrementOnBuild="False" IncrementOnRebuild="True" IncrementInformational="False" />
+    </VisualStudio>
+  </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

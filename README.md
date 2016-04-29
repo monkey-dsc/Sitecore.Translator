@@ -20,3 +20,13 @@ Keep in mind: The dictionary domain has a fall-back domain! If a key is not foun
 If a key was loaded from the fall-back domain and you set "AddToAllDictionaries" sometime later, the translator is smart enough to recognize this! It adds the translation to the current dictionary and to all other configured dictionaries where not an item with this key exists!
 
 Important note: Copy your Sitecore.Kernel.dll to the lib/Sitecore-Folder
+
+
+What's new?
+===================
+
+Version 1.0.10.5963
+
+An issue #1 occured on environments with a SwitchMasterToWeb.config. This issue was fixed.
+
+For performance optimization the translation are now gonna be cached! So if you translate something and nothing happens, clear your caches first.

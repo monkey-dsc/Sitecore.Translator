@@ -2,7 +2,6 @@
 {
         public static class FieldNames
         {
-            public static string ItemProcessRedirects = "Items Which Always Process Redirects";
             public static string Key = "Key";
             public static string Phrase = "Phrase";
             public static string RedirectTo = "redirect to";

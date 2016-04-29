@@ -7,7 +7,6 @@ using SeitenKern.SitecoreContrib.Utils;
 using Sitecore;
 using Sitecore.Data;
 using Sitecore.Data.Items;
-using Sitecore.Diagnostics;
 using Sitecore.Globalization;
 using ItemUtil = SeitenKern.SitecoreContrib.Utils.ItemUtil;
 
@@ -18,13 +17,16 @@ namespace SeitenKern.SitecoreContrib
         public DefaultTranslator(bool alphabeticRegister = true)
         {
             AlphabeticRegister = alphabeticRegister;
+            TranslationCache = new TranslatorCache();
         }
+
+        public TranslatorCache TranslationCache { get; set; }
 
         public bool AlphabeticRegister { get; set; }
 
         public static Database Database
         {
-            get { return Database.GetDatabase("master"); }
+            get { return Context.Database; }
         }
 
         public DictionaryDomain Dictionary
@@ -44,10 +46,21 @@ namespace SeitenKern.SitecoreContrib
 
         public string Translate(string key, bool allDictionaryDomains = false)
         {
-            Assert.ArgumentNotNullOrEmpty(key, "key");
+#if DEBUG
+			Assert.ArgumentNotNullOrEmpty(key, "key");
+#endif
+            var cacheKey = GetCacheKey(Context.Language, key);
+            var existingTranslation = TranslationCache.Get(cacheKey);
+
+            if (!string.IsNullOrEmpty(existingTranslation))
+            {
+                return existingTranslation;
+            }
 
             var item = GetTranslationItem(key, allDictionaryDomains);
-            return item[FieldNames.Phrase];
+            var phrase = item[FieldNames.Phrase];
+            TranslationCache.Set(cacheKey, phrase);
+            return phrase;
         }
 
         public Item GetTranslationItem(string key, bool addToAllDictionaries = false)
@@ -84,6 +97,11 @@ namespace SeitenKern.SitecoreContrib
                 addToAllDictionaries);
         }
 
+        private string GetCacheKey(Language language, string key)
+        {
+            return string.Format("{0}|{1}", language.CultureInfo.TwoLetterISOLanguageName, key);
+        }
+
         private static Item GetQueryItem(string path, string key)
         {
             return
@@ -108,7 +126,11 @@ namespace SeitenKern.SitecoreContrib
                 ItemUtil.CreateItemPath(
                     Database,
                     PathUtil.Combine(
-                        dictionaryPath.CreateRegisterItemPath(Database, key, AlphabeticRegister, DictionaryFolderTemplate),
+                        dictionaryPath.CreateRegisterItemPath(
+                            Database,
+                            key,
+                            AlphabeticRegister,
+                            DictionaryFolderTemplate),
                         key),
                     dictionaryEntryTemplate,
                     fields).CreateLanguageVersions(Database);
@@ -133,14 +155,22 @@ namespace SeitenKern.SitecoreContrib
             {
                 var item = Database.GetItem(
                     PathUtil.Combine(
-                        dictionaryPath.CreateRegisterItemPath(Database, key, AlphabeticRegister, DictionaryFolderTemplate),
+                        dictionaryPath.CreateRegisterItemPath(
+                            Database,
+                            key,
+                            AlphabeticRegister,
+                            DictionaryFolderTemplate),
                         key));
                 if (item == null)
                 {
                     ItemUtil.CreateItemPath(
                         Database,
                         PathUtil.Combine(
-                            dictionaryPath.CreateRegisterItemPath(Database, key, AlphabeticRegister, DictionaryFolderTemplate),
+                            dictionaryPath.CreateRegisterItemPath(
+                                Database,
+                                key,
+                                AlphabeticRegister,
+                                DictionaryFolderTemplate),
                             key),
                         dictionaryEntryTemplate,
                         fields).CreateLanguageVersions(Database);
